@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Video Game Details</title>
-</head>
-<body>
+@extends('layouts.app')
+
+@section('title', 'Video Game Details')
+
+@section('content')
 
     <h1>{{ $item['title'] }}</h1>
 
@@ -15,9 +14,8 @@
 
     <p>Created by: Samson Idanan Jr.</p>
 
-    <a href="{{ route('games.index') }}">
+    <a href="{{ route('games.index') }}" class="btn btn-primary">
         Back to Game List
     </a>
 
-</body>
-</html>
+@endsection

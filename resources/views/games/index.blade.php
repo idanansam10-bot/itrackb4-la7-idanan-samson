@@ -1,17 +1,12 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Video Game Collection</title>
-</head>
-<body>
+@extends('layouts.app')
 
-    <h1>My Video Game Collection</h1>
+@section('title', 'Video Game Collection')
 
-    <p>Created by: Samson Idanan Jr.</p>
+@section('content')
 
     <p>
         <a href="{{ route('games.featured') }}">
-            ⭐ View Featured Game
+            View Featured Game
         </a>
     </p>
 
@@ -21,8 +16,9 @@
         </a>
     </p>
 
-    <table border="1" cellpadding="10">
+    <table class="table table-striped table-bordered">
         <tr>
+            <th>#</th>
             <th>ID</th>
             <th>Game</th>
             <th>Developer</th>
@@ -30,8 +26,9 @@
             <th>Year</th>
         </tr>
 
-        @foreach ($games as $item)
+        @forelse ($games as $item)
             <tr>
+                <td>{{ $loop->iteration }}</td>
                 <td>{{ $item['id'] }}</td>
 
                 <td>
@@ -42,11 +39,23 @@
 
                 <td>{{ $item['developer'] }}</td>
                 <td>{{ $item['genre'] }}</td>
-                <td>{{ $item['year'] }}</td>
+
+                <td>
+                    {{ $item['year'] }}
+
+                    @if ($item['year'] == 2026)
+                        <strong>Latest</strong>
+                    @endif
+                </td>
             </tr>
-        @endforeach
+        @empty
+            <tr>
+                <td colspan="6">
+                    No games are available right now.
+                </td>
+            </tr>
+        @endforelse
 
     </table>
 
-</body>
-</html>
+@endsection
