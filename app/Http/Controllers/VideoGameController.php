@@ -2,69 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\Request;
+
 class VideoGameController extends Controller
 {
-    public function index()
-    {
-        $games = $this->games();
-
-        return view('games.index', [
-            'games' => $games
-        ]);
-    }
-
-    public function show($id)
-    {
-        $games = $this->games();
-
-        if (!isset($games[$id])) {
-            abort(404);
-        }
-
-        $item = $games[$id];
-
-        return view('games.show', [
-            'item' => $item
-        ]);
-    }
-
-    public function featured()
-    {
-        $games = $this->games();
-
-        $item = $games[3];
-
-        return view('games.featured', [
-            'item' => $item
-        ]);
-    }
-
-    public function filter($value = null)
-    {
-        $games = $this->games();
-
-        if ($value === null) {
-            return view('games.filter', [
-                'games' => $games,
-                'activeFilter' => 'All'
-            ]);
-        }
-
-        $filtered = [];
-
-        foreach ($games as $item) {
-            if ($item['genre'] === $value) {
-                $filtered[] = $item;
-            }
-        }
-
-        return view('games.filter', [
-            'games' => $filtered,
-            'activeFilter' => $value
-        ]);
-    }
-
-    private function games()
+   private function games()
     {
         return [
             1 => [
@@ -115,5 +57,72 @@ class VideoGameController extends Controller
                 'year' => 2013,
             ],
         ];
+    }
+
+    public function index()
+    {
+         $games = $this->games();
+
+        return view('games.index' , [
+            'games' => $games
+        ]);
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        $games = $this->games();
+
+        if (!isset($games[$id])) {
+            abort(404);
+        }
+
+        $item = $games[$id];
+
+        return view('games.show', [
+            'item' => $item
+        ]);
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
