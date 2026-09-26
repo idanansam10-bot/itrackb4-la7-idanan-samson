@@ -1,5 +1,5 @@
-<nav>
-    <a href="{{ route('games.index') }}">Game List</a>
-    |
-    <a href="{{ route('games.featured') }}">Featured Game</a>
+<nav class="nav mb-4">
+    <a class="nav-link {{ request()->is('games*') ? 'active' : '' }}" href="{{ route('games.index') }}">
+        Video Games
+    </a>
 </nav>

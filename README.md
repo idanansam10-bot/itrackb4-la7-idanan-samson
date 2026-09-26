@@ -1,47 +1,17 @@
-# ITRACKB4 - Laboratory Activity 3
+# ITRACKB4 LA6 - Video Game Filters
 
-## Video Game Collection
+## Q1. Why was there no need to create another route for the second filter?
 
-This project is a simple Laravel application about video games.
-It has a game list, detail pages, a featured game, and a filter
-for game genres.
+The two filters are part of the same game list, so they can use the existing games index route. The router only checks the path and does not use the query string to match a route. Because of this, genre and developer can be added after the question mark. Both filters can also be placed in the same URL.
 
-## Routes
+## Q2. If both filters were route parameters, what would the URL for one genre only look like?
 
-- `/games` - shows all video games.
-- `/games/featured` - shows the featured game.
-- `/games/{id}` - shows the details of a game.
-- `/games/filter/{value}` - filters games by genre.
-- `/games/filter` - shows all games when there is no filter.
+If the genre was a route parameter, the URL could be `/games/RPG`. The value RPG would become part of the path that the router matches. This would make filtering less flexible when another filter needs to be added.
 
-## Questions
+## Q3. Which navigation pattern needed to change for the detail page?
 
-### 1. Why must `/games/featured` be placed before `/games/{id}`?
+The navigation pattern needed to include the game detail path, so the games link can still be active on `/games/1`. The filter page did not need a different pattern because the query string is not part of the path. The same `/games` path is used even when a filter is added.
 
-The featured route should be placed first because Laravel checks routes
-from top to bottom. If the `{id}` route comes first, Laravel may treat
-"featured" as an ID. Placing the featured route first makes sure that
-the correct page is displayed.
+## Q4. Why was the old filter removed while the empty methods were kept?
 
-### 2. What happens when a nonexistent ID is requested?
-
-The controller checks if the ID exists in the game data. If the ID does
-not exist, `abort(404)` is used. This displays a 404 Not Found page.
-
-### 3. Why are named routes useful? What can break if we do not use them?
-
-Named routes make links easier to manage because we can use the route
-name instead of typing the URL directly. If a URL changes later,
-hard-coded links may stop working. Named routes make the application
-easier to maintain.
-
-## How to Run
-
-1. Open the project folder in the terminal.
-2. Run `php artisan serve`.
-3. Open the local Laravel URL in a browser.
-4. Visit `/games` to view the video game collection.
-
-## Author
-
-Samson Idanan Jr.
+The old filter was removed because the new query-string filtering already replaces its purpose. The old filter URL is still supported through a redirect, so users can reach the new URL. The empty store and update methods were kept because they are unfinished controller methods that can be used in later activities.

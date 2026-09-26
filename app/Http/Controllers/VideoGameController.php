@@ -6,7 +6,32 @@ use Illuminate\Http\Request;
 
 class VideoGameController extends Controller
 {
-   private function games()
+    public function index(Request $request)
+    {
+        $games = $this->games();
+
+        $genre = $request->query('genre', 'all');
+        $developer = $request->query('developer', 'all');
+
+        $filtered = [];
+
+        foreach ($games as $item) {
+            $genreMatch = $genre === 'all' || $item['genre'] === $genre;
+            $developerMatch = $developer === 'all' || $item['developer'] === $developer;
+
+            if ($genreMatch && $developerMatch) {
+                $filtered[] = $item;
+            }
+        }
+
+        return view('games.index', [
+            'games' => $filtered,
+            'genre' => $genre,
+            'developer' => $developer
+        ]);
+    }
+
+    private function games()
     {
         return [
             1 => [
@@ -59,34 +84,16 @@ class VideoGameController extends Controller
         ];
     }
 
-    public function index()
-    {
-         $games = $this->games();
-
-        return view('games.index' , [
-            'games' => $games
-        ]);
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         //
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
     public function show(string $id)
     {
         $games = $this->games();
@@ -102,25 +109,16 @@ class VideoGameController extends Controller
         ]);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, string $id)
     {
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(string $id)
     {
         //
