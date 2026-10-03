@@ -1,17 +1,17 @@
-# ITRACKB4 LA6 - Video Game Filters
+# ITRACKB4 LA7 - Video Game Collection
 
-## Q1. Why was there no need to create another route for the second filter?
+## Q1. What is the difference between POST and GET, and what happens when you refresh after a POST?
 
-The two filters are part of the same game list, so they can use the existing games index route. The router only checks the path and does not use the query string to match a route. Because of this, genre and developer can be added after the question mark. Both filters can also be placed in the same URL.
+GET is used when we want to view or request a page, while POST is used when we send data from a form. In this activity, the game form uses POST because it sends a new video game to the controller. After the game is saved, the controller redirects to the game list. This prevents the same POST request from being submitted again when the page is refreshed.
 
-## Q2. If both filters were route parameters, what would the URL for one genre only look like?
+## Q2. What happens when validation fails, and why does the save code not run?
 
-If the genre was a route parameter, the URL could be `/games/RPG`. The value RPG would become part of the path that the router matches. This would make filtering less flexible when another filter needs to be added.
+When validation fails, Laravel returns the user to the form and displays the errors. The values that were entered can still be shown using old(). The save code does not continue because the validation did not pass. This prevents an invalid game from being saved to the JSON file.
 
-## Q3. Which navigation pattern needed to change for the detail page?
+## Q3. Why does the success message appear once even though the layout is shown on every page?
 
-The navigation pattern needed to include the game detail path, so the games link can still be active on `/games/1`. The filter page did not need a different pattern because the query string is not part of the path. The same `/games` path is used even when a filter is added.
+The success message is stored as a session flash message after a game is successfully saved. The layout checks the session and displays the message when it is available. After the message is shown, the flash message is removed from the session. That is why the message appears once even though the layout is used on every page.
 
-## Q4. Why was the old filter removed while the empty methods were kept?
+## Author
 
-The old filter was removed because the new query-string filtering already replaces its purpose. The old filter URL is still supported through a redirect, so users can reach the new URL. The empty store and update methods were kept because they are unfinished controller methods that can be used in later activities.
+Samson Idanan Jr.

@@ -17,4 +17,5 @@ Route::get('/games/filter/{value?}', function ($value = null) {
     return redirect()->route('games.index');
 })->name('games.filter');
 
-Route::resource('games', VideoGameController::class);
+Route::resource('games', VideoGameController::class)
+    ->only(['index', 'create', 'store', 'show']);

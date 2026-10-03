@@ -11,11 +11,19 @@
 
     @include('partials._nav')
 
-    <p>Created by: Samson Idanan Jr.</p>
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 
     <div class="container">
         @yield('content')
     </div>
+
+    <footer class="container mt-4">
+        <p>Created by: Samson Idanan Jr.</p>
+    </footer>
 
 </body>
 </html>

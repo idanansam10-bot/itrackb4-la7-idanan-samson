@@ -5,6 +5,12 @@
 @section('content')
 <h2>Video Game List</h2>
 
+<p>
+    <a href="{{ route('games.create') }}" class="btn btn-primary">
+        Add Video Game
+    </a>
+</p>
+
 <p>Genre: {{ $genre }} | Developer: {{ $developer }}</p>
 
 <h5>Filter by Genre</h5>
